@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image';
 import Link from 'next/link'
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle,AiOutlineShoppingCart } from 'react-icons/ai';
 const Navbar = () => {
   const ref = useRef('')
   const handleClick = ()=>{
@@ -30,8 +30,7 @@ const Navbar = () => {
             <Link legacyBehavior  href={"/sample"}><a className="mr-5 hover:text-pink-900 cursor-pointer">My Projects</a></Link>
             <Link legacyBehavior  href={"/products"}><a className="mr-5 hover:text-pink-900 cursor-pointer">My Products</a></Link>
           </nav>
-          <button onClick={handleClick} className="inline-flex items-center bg-pink-400 border-0 py-1 px-3 focus:outline-none hover:bg-pink-500 rounded text-base mt-4 md:mt-0">Button
-          </button>
+          <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick}/>
         </div>
       <div ref={ref} className="sideCart absolute top-0 right-0 bg-pink-600 px-11 py-4 transition-all translate translate-transform translate-x-full">
       <AiFillCloseCircle onClick={handleClick} className='cursor-pointer text-xl absolute right-1 top-1'/>
