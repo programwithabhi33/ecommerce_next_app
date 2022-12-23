@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const product = () => {
   return (
@@ -21,7 +22,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -39,7 +40,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -57,7 +58,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -75,7 +76,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -93,7 +94,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -111,7 +112,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -129,7 +130,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
@@ -147,7 +148,7 @@ const product = () => {
                 <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Add To Cart</button>
                 </a>
                 <a className="ml-2 text-gray-500">
-                <button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button>
+                 <Link legacyBehavior  href={"/product/abhishek"}><button className="btn bg-pink-400 border-0 p-3 rounded-md text-sm font-semibold text-black">Buy Now</button></Link>
                 </a>
               </span>
             </div>
