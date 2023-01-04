@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image';
 import Link from 'next/link'
-import { AiFillCloseCircle, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiFillCloseCircle, AiOutlineShoppingCart,AiFillPlusCircle,AiFillMinusCircle } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
-const Navbar = () => {
+const Navbar = ({cart,addToCart}) => {
 
   const ref = useRef('')
   const handleClick = () => {
@@ -36,10 +36,15 @@ const Navbar = () => {
         <div ref={ref} className="sideCart absolute top-0 right-0 bg-pink-600 px-11 py-4 transition-all translate translate-transform translate-x-full">
           <AiFillCloseCircle onClick={handleClick} className='cursor-pointer text-xl absolute right-1 top-1' />
           <ol>
-            <li>abhishek</li>
-            <li>abhishek2</li>
-            <li>abhishek3</li>
+          {Object.keys(cart).length == 0 && <div>Your cart is Empty!</div>}
+          {Object.keys(cart).map((item)=>{
+            console.log('item')
+            console.log(cart)
+            return <li key={item}><AiFillMinusCircle className='m2-0 cursor-pointer inline'/> {cart[item].itemName} {cart[item].qty}<AiFillPlusCircle onClick={()=>{addToCart(cart[item].itemCode,cart[item].itemName,parseInt(cart[item].qty+1),cart[item].price,cart[item].size)}} className='m-2 cursor-pointer inline'/></li>
+          })}
+          {Object.keys(cart).length > 0 && <button className="btn bg-amber-400 px-2 rounded m-2">Clear Cart</button>}
           </ol>
+
         </div>
       </nav>
       <div className="text-center py-4 lg:px-4 cursor-pointer">
