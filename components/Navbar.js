@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { AiFillCloseCircle, AiOutlineShoppingCart,AiFillPlusCircle,AiFillMinusCircle } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
-const Navbar = ({cart,addToCart}) => {
+const Navbar = ({cart,addToCart,removeFromCart}) => {
 
   const ref = useRef('')
   const handleClick = () => {
@@ -38,11 +38,9 @@ const Navbar = ({cart,addToCart}) => {
           <ol>
           {Object.keys(cart).length == 0 && <div>Your cart is Empty!</div>}
           {Object.keys(cart).map((item)=>{
-            console.log('item')
-            console.log(cart)
-            return <li key={item}><AiFillMinusCircle className='m2-0 cursor-pointer inline'/> {cart[item].itemName} {cart[item].qty}<AiFillPlusCircle onClick={()=>{addToCart(cart[item].itemCode,cart[item].itemName,parseInt(cart[item].qty+1),cart[item].price,cart[item].size)}} className='m-2 cursor-pointer inline'/></li>
+            return <li key={item}><AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].qty)}} className='m2-0 cursor-pointer inline'/> {cart[item].itemName} {cart[item].qty}<AiFillPlusCircle onClick={()=>{addToCart(cart[item].itemCode,cart[item],2,cart[item].price,cart[item].size)}} className='m-2 cursor-pointer inline'/></li>
           })}
-          {Object.keys(cart).length > 0 && <button className="btn bg-amber-400 px-2 rounded m-2">Clear Cart</button>}
+          {Object.keys(cart).length > 0 && <button className="btn bg-pink-400 px-2 rounded m-2">Clear Cart</button>}
           </ol>
 
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import '../styles/globals.css'
@@ -8,47 +8,65 @@ function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setsubTotal] = useState(0)
 
+  useEffect(() => {
+    try{
+      if(localStorage.getItem("cart")){
+        setCart(JSON.parse(localStorage.getItem("cart")));
+      }
+    }
+    catch(error){
+      console.error(error)
+      localStorage.clear();
+    }
+   
+  }, [])
+  
+
  let addToCart = (itemCode,itemName,qty,price,size)=>{
-  console.log("add to cart")
-  console.log(`itemCode = ${itemCode} itemName = ${itemName} qty= ${qty} price= ${price} size = ${size}`)
     let newCart = cart;
     if(itemCode in newCart){
-      newCart[itemCode]['qty'] = cart[qty]+1;
+      newCart[itemCode]['qty'] = cart[itemCode].qty+1;
     }
     else{
       newCart[itemCode] = {itemCode,itemName,qty,price,size};
     }
+    console.log("the qty is the")
+    console.log(newCart[itemCode].qty)
     saveCart(newCart)
     setCart(newCart)
   }
   let saveCart = (cart)=>{
     let sub = 0;
     Object.keys(cart).map((key)=>{
-      sub += key.qty * key.price;
+      sub += cart[key].qty * cart[key].price;
     })
     setsubTotal(sub)
     // Storing cart in localStorage 
-    // localStorage.setItem(json);
+    localStorage.setItem("cart",JSON.stringify(cart));
   }
 
-  let deleteCart = (itemCode)=>{
+  let clearCart = (itemCode)=>{
     setCart({})
 
     // We are giving an empty object ot the saveCart because setCart takes time to update the cart 
     saveCart({})
   }
-  let removeFromCart = (itemCode)=>{
-    if(cart[itemCode].qty <=0 ){
-      delete cart[itemCode];
+  let removeFromCart = (itemCode,qty)=>{
+    let newCart = cart;
+    console.log(newCart[itemCode].qty)
+    if(newCart[itemCode].qty >= 2 ){  
+      newCart[itemCode].qty = newCart[itemCode].qty -1; 
     }
     else{
-      cart[itemCode].qty = cart[itemCode].qty -1; 
+      delete newCart[itemCode]; 
     }
+    saveCart(newCart)
+    setCart(newCart)
   }
   
   return <>
-  <Navbar cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} deleteCart={deleteCart} subTotal={subTotal} />
-  <Component  cart={cart} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} deleteCart={deleteCart} subTotal={subTotal} {...pageProps} />
+  <Navbar cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+  <Component  cart={cart} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>
 }
