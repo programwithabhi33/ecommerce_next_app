@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { AiFillCloseCircle, AiOutlineShoppingCart,AiFillPlusCircle,AiFillMinusCircle } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
-const Navbar = ({cart,addToCart,removeFromCart}) => {
+const Navbar = ({cart,addToCart,removeFromCart,subTotal}) => {
 
   const ref = useRef('')
   const handleClick = () => {
@@ -33,7 +33,7 @@ const Navbar = ({cart,addToCart,removeFromCart}) => {
           <Link href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2'/></Link>
           <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick} />
         </div>
-        <div ref={ref} className="sideCart absolute top-0 right-0 bg-pink-600 px-11 py-4 transition-all translate translate-transform translate-x-full">
+        <div ref={ref} className="sideCart absolute h-[100vh] top-0 right-0 bg-pink-300 px-11 py-4 transition-all translate translate-transform translate-x-full">
           <AiFillCloseCircle onClick={handleClick} className='cursor-pointer text-xl absolute right-1 top-1' />
           <ol>
           {Object.keys(cart).length == 0 && <div>Your cart is Empty!</div>}
@@ -42,7 +42,7 @@ const Navbar = ({cart,addToCart,removeFromCart}) => {
           })}
           {Object.keys(cart).length > 0 && <button className="btn bg-pink-400 px-2 rounded m-2">Clear Cart</button>}
           </ol>
-
+          <span>Subtotal: {subTotal}</span>
         </div>
       </nav>
       <div className="text-center py-4 lg:px-4 cursor-pointer">

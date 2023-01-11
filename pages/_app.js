@@ -12,6 +12,12 @@ function MyApp({ Component, pageProps }) {
     try{
       if(localStorage.getItem("cart")){
         setCart(JSON.parse(localStorage.getItem("cart")));
+        let sub = 0;
+        Object.keys(JSON.parse(localStorage.getItem("cart"))).map((key)=>{
+          console.log(cart[key])
+          sub += cart[key].qty * cart[key].price;
+        })
+        setsubTotal(sub)
       }
     }
     catch(error){
@@ -30,8 +36,6 @@ function MyApp({ Component, pageProps }) {
     else{
       newCart[itemCode] = {itemCode,itemName,qty,price,size};
     }
-    console.log("the qty is the")
-    console.log(newCart[itemCode].qty)
     saveCart(newCart)
     setCart(newCart)
   }
@@ -65,7 +69,7 @@ function MyApp({ Component, pageProps }) {
   }
   
   return <>
-  <Navbar cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+  <Navbar key={subTotal} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   <Component  cart={cart} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>
