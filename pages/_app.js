@@ -7,17 +7,16 @@ function MyApp({ Component, pageProps }) {
 
   const [cart, setCart] = useState({})
   const [subTotal, setsubTotal] = useState(0)
+  const [abhi, setAbhi] = useState(0)
 
   useEffect(() => {
     try{
       if(localStorage.getItem("cart")){
         setCart(JSON.parse(localStorage.getItem("cart")));
-        let sub = 0;
-        Object.keys(JSON.parse(localStorage.getItem("cart"))).map((key)=>{
-          console.log(cart[key])
-          sub += cart[key].qty * cart[key].price;
-        })
-        setsubTotal(sub)
+        saveCart(JSON.parse(localStorage.getItem("cart")));
+        setTimeout(() => {
+          setAbhi("abhishek")
+        }, 4000);
       }
     }
     catch(error){
@@ -69,7 +68,8 @@ function MyApp({ Component, pageProps }) {
   }
   
   return <>
-  <Navbar key={subTotal} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+  {/* When you passing key prop to component that means the component only render if the key is defined or something like that i'm not sure about that  */}
+  <Navbar key={abhi} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   <Component  cart={cart} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>
