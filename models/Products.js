@@ -8,4 +8,5 @@ const ProductsSchema = new Schema({
   category: {type:String},
   slug: { type: String, required:true},
 });
-export default mongoose.model(ProductsSchema)
+mongoose.models = {};
+export default mongoose.model("Product",ProductsSchema)
