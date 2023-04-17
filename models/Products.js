@@ -6,7 +6,10 @@ const ProductsSchema = new Schema({
   desc: {type:String},
   quantity:   {type:Number,required:true,default:1},
   category: {type:String},
-  slug: { type: String, required:true},
+  slug: { type: String, required:true,unique: true},
+  size: { type: String, required:true},
+  color: { type: String, required:true},
+  image: { type: String, required:true},
 });
 mongoose.models = {};
 export default mongoose.model("Product",ProductsSchema)

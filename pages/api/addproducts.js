@@ -10,6 +10,9 @@ const handler = async (req,res)=>{
                 quantity:  req.body[i].quantity,
                 category:  req.body[i].category,
                 slug:  req.body[i].slug,
+                size:  req.body[i].size,
+                color:  req.body[i].color,
+                image:  req.body[i].image,
             })
             await pd.save();
         }
