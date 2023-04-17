@@ -38,7 +38,7 @@ const Navbar = ({cart,addToCart,removeFromCart,subTotal,clearCart}) => {
           <ol>
           {Object.keys(cart).length == 0 && <div>Your cart is Empty!</div>}
           {Object.keys(cart).map((item)=>{
-            return <li key={item}><AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].qty)}} className='m2-0 cursor-pointer inline'/> {cart[item].itemName} {cart[item].qty}<AiFillPlusCircle onClick={()=>{addToCart(cart[item].itemCode,cart[item],2,cart[item].price,cart[item].size)}} className='m-2 cursor-pointer inline'/></li>
+            return <li key={item}><AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].qty)}} className='m2-0 cursor-pointer inline'/> {cart[item].itemName + ` (${cart[item].color})/${cart[item].size}`} {cart[item].qty}<AiFillPlusCircle onClick={()=>{addToCart(cart[item].itemCode,cart[item],2,cart[item].price,cart[item].size)}} className='m-2 cursor-pointer inline'/></li>
           })}
           {Object.keys(cart).length > 0 && <button onClick={clearCart} className="btn bg-pink-400 px-2 rounded m-2">Clear Cart</button>}
           </ol>

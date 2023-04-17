@@ -86,11 +86,11 @@ const product = ({addToCart,mainProduct,colorSizeArray}) => {
                 <div className="flex">
                   <span className="mr-3">Color</span>
                   
-                  {Object.keys(colorSizeArray).includes('white') && <button onClick={()=>{refreshVariant(size,'white')}} className={`border-2  ml-1 bg-white-700 rounded-full w-6 h-6 focus:outline-none ${color == "white" ? "border-black":"border-grey-300"}`}></button>}
-                  {Object.keys(colorSizeArray).includes('black') && <button onClick={()=>{refreshVariant(size,'black')}} className={`border-2  ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${color == "black" ? "border-black":"border-grey-300"}`}></button>}
-                  {Object.keys(colorSizeArray).includes('green') && <button onClick={()=>{refreshVariant(size,'green')}} className={`border-2  ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none ${color == "green" ? "border-black":"border-grey-300"}`}></button>}
-                  {Object.keys(colorSizeArray).includes('yellow') && <button onClick={()=>{refreshVariant(size,'yellow')}} className={`border-2  ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none ${color == "yellow" ? "border-black":"border-grey-300"}`}></button>}
-                  {Object.keys(colorSizeArray).includes('purple') && <button onClick={()=>{refreshVariant(size,'purple')}} className={`border-2  ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none ${color == "purple" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('white') && Object.keys(colorSizeArray['white']).includes(size) && <button onClick={()=>{refreshVariant(size,'white')}} className={`border-2  ml-1 bg-white-700 rounded-full w-6 h-6 focus:outline-none ${color == "white" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('black') && Object.keys(colorSizeArray['black']).includes(size) && <button onClick={()=>{refreshVariant(size,'black')}} className={`border-2  ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${color == "black" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('green') && Object.keys(colorSizeArray['green']).includes(size) && <button onClick={()=>{refreshVariant(size,'green')}} className={`border-2  ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none ${color == "green" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('yellow') && Object.keys(colorSizeArray['yellow']).includes(size) && <button onClick={()=>{refreshVariant(size,'yellow')}} className={`border-2  ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none ${color == "yellow" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('purple') && Object.keys(colorSizeArray['purple']).includes(size) && <button onClick={()=>{refreshVariant(size,'purple')}} className={`border-2  ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none ${color == "purple" ? "border-black":"border-grey-300"}`}></button>}
                 </div>
                 <div className="flex ml-6 items-center">
                   <span className="mr-3">Size</span>
@@ -111,7 +111,7 @@ const product = ({addToCart,mainProduct,colorSizeArray}) => {
               </div>
               <div className="flex mx-auto">
                 <span className="title-font font-medium text-2xl text-gray-900">₹58,000</span>
-                <button onClick={()=>{addToCart(product,'hp laptop',1,59000,"M")}} className="flex ml-4 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-600 rounded">Add To Cart</button>
+                <button onClick={()=>{addToCart(product,mainProduct.title,1,59000,mainProduct.size,mainProduct.color)}} className="flex ml-4 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-600 rounded">Add To Cart</button>
                 <button className="flex ml-4 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">

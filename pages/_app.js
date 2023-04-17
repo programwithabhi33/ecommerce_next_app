@@ -27,13 +27,13 @@ function MyApp({ Component, pageProps }) {
   }, [])
   
 
- let addToCart = (itemCode,itemName,qty,price,size)=>{
+ let addToCart = (itemCode,itemName,qty,price,size,color)=>{
     let newCart = cart;
     if(itemCode in newCart){
       newCart[itemCode]['qty'] = cart[itemCode].qty+1;
     }
     else{
-      newCart[itemCode] = {itemCode,itemName,qty,price,size};
+      newCart[itemCode] = {itemCode,itemName,qty,price,size,color};
     }
     saveCart(newCart)
     setCart(newCart)
