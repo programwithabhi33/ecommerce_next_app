@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router';
+import mongoose from 'mongoose';
+import Products from '../../models/Products';
 
-const product = ({addToCart}) => {
+const product = ({addToCart,mainProduct,colorSizeArray}) => {
   const router = useRouter()
   // const { toast, snackbar } = require('tailwind-toast')
 
   // check that router is ready or not for the initial page because that the router is not ready when the first page appears it needs some time to be ready
   if(!router.isReady) return;
+  console.log(mainProduct);
+  console.log(colorSizeArray);
   const { product } = router.query
   // console.log(router)
   let checkPinCode = () => {
@@ -20,16 +24,26 @@ const product = ({addToCart}) => {
     }
   }
   // console.log(addToCart)
+  const refreshVariant = (newSize,newColor)=>{
+    // console.log(newColor,newSize)
+    // console.log(colorSizeArray)
+    const url = `http://localhost:3000/product/${colorSizeArray[newColor][newSize]['slug']}`;
+    window.location = url;
+  }
+
+
+  let [color,setColor] = useState(mainProduct.color);
+  let[size,setSize] = useState(mainProduct.size);
 
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto rounded" src="https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/91-U2J7fKoL._AC_UY327_FMwebp_QL65_.jpg" />
+            <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto rounded" src={mainProduct.image} />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">The Catcher in the Rye</h1>
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{mainProduct.title}</h1>
               <div className="flex mb-4">
                 <span className="flex items-center">
                   <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-pink-500" viewBox="0 0 24 24">
@@ -67,22 +81,25 @@ const product = ({addToCart}) => {
                   </a>
                 </span>
               </div>
-              <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
+              <p className="leading-relaxed">{mainProduct.desc}</p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                 <div className="flex">
                   <span className="mr-3">Color</span>
-                  <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-                  <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-                  <button className="border-2 border-gray-300 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none"></button>
+                  
+                  {Object.keys(colorSizeArray).includes('white') && <button onClick={()=>{refreshVariant(size,'white')}} className={`border-2  ml-1 bg-white-700 rounded-full w-6 h-6 focus:outline-none ${color == "white" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('black') && <button onClick={()=>{refreshVariant(size,'black')}} className={`border-2  ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${color == "black" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('green') && <button onClick={()=>{refreshVariant(size,'green')}} className={`border-2  ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none ${color == "green" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('yellow') && <button onClick={()=>{refreshVariant(size,'yellow')}} className={`border-2  ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none ${color == "yellow" ? "border-black":"border-grey-300"}`}></button>}
+                  {Object.keys(colorSizeArray).includes('purple') && <button onClick={()=>{refreshVariant(size,'purple')}} className={`border-2  ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none ${color == "purple" ? "border-black":"border-grey-300"}`}></button>}
                 </div>
                 <div className="flex ml-6 items-center">
                   <span className="mr-3">Size</span>
                   <div className="relative">
-                    <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10">
-                      <option>SM</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
+                    <select onChange={(e)=>{refreshVariant(e.target.value,color)}} value={mainProduct.size} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10">
+                      {Object.keys(colorSizeArray[color]).includes('S') && <option value="S">S</option>}
+                      {Object.keys(colorSizeArray[color]).includes('M') && <option value="M">M</option>}
+                      {Object.keys(colorSizeArray[color]).includes('L') && <option value="L">L</option>}
+                      {Object.keys(colorSizeArray[color]).includes('XL') && <option value="XL">XL</option>}
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
@@ -113,6 +130,31 @@ const product = ({addToCart}) => {
     </div>
 
   )
+}
+
+export async function getServerSideProps(context) {
+ 
+  if(!mongoose.connections[0].readyState){
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+
+  let product = await Products.findOne({slug:context.query.product});
+  let variants = await Products.find({title:product.title});
+  let colorSizeArray = {};
+
+  for(let item of variants ){
+    if(Object.keys(colorSizeArray).includes(item.color)){
+      colorSizeArray[item.color][item.size] = {slug:item.slug}
+    }
+    else{
+      colorSizeArray[item.color] = {};
+      colorSizeArray[item.color][item.size] = {slug:item.slug};
+    }
+  }
+
+  return {
+    props: {mainProduct:JSON.parse(JSON.stringify(product)),colorSizeArray:JSON.parse(JSON.stringify(colorSizeArray))}, // will be passed to the page component as props
+  }
 }
 
 export default product
