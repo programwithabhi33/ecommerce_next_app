@@ -66,11 +66,17 @@ function MyApp({ Component, pageProps }) {
     saveCart(newCart)
     setCart(newCart)
   }
+
+  const buyNow = (itemCode,itemName,qty,price,size,color)=>{
+    const newCart = {itemCode:{itemCode,itemName,qty:1,price,size,color}}
+    saveCart(newCart);
+    setCart(newCart)
+  }
   
   return <>
   {/* When you passing key prop to component that means the component only render if the key is defined or something like that i'm not sure about that  */}
   <Navbar key={abhi} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
-  <Component  cart={cart} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+  <Component  cart={cart} buyNow={buyNow} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>
 }
