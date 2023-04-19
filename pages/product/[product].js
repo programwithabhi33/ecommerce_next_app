@@ -16,7 +16,7 @@ const product = ({buyNow,addToCart,mainProduct,colorSizeArray}) => {
   let checkPinCode = () => {
     let pinCodeInput = document.getElementById("pin_code");
     if (pinCodeInput.value != "") {
-      console.log("Yeyyyy")
+      // console.log("Yeyyyy")
     }
     else {
       pinCodeInput.focus();
