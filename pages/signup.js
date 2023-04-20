@@ -42,7 +42,7 @@ export const signup = () => {
         let response_json = await res.json();
         document.getElementById("sign_form").reset();
         document.getElementById("sign_up").setAttribute("disabled", false)
-        toast('👍 Account Created Successfully!', {
+        toast('👍 Your Account Has Been Created Successfully!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
