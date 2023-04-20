@@ -6,6 +6,8 @@ const handler = async (req,res)=>{
     if(req.method == "POST"){
         let user = await User.findOne({"email":req.body.email});
         if(user){
+
+            // decrypting the database password using secret key e.g., 'secret' and matching this to password that has been come from req.body
             let bytes  = CryptoJS.AES.decrypt(user.password, 'secret');
             let password = bytes.toString(CryptoJS.enc.Utf8);
 

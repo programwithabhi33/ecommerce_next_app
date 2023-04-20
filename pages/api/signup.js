@@ -7,6 +7,7 @@ const handler = async (req,res)=>{
     if(req.method == "POST"){
         console.log(req.body);
         const {name,email} = req.body;
+        // password encryption using the AES.encrypt method with secret key e.g., 'secret'
         let new_user = new User({name,email,password: CryptoJS.AES.encrypt(req.body.password, 'secret').toString()});
         await new_user.save();
         res.status(200).json({success:"success"})
