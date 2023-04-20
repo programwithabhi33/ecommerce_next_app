@@ -1,10 +1,15 @@
 import connectDb from "../../middleware/mongoose"
 import User from "../../models/Users"
+import CryptoJS from "crypto-js";
+
 const handler = async (req,res)=>{
     if(req.method == "POST"){
         let user = await User.findOne({"email":req.body.email});
         if(user){
-            if(req.body.password == user.password){
+            let bytes  = CryptoJS.AES.decrypt(user.password, 'secret');
+            let password = bytes.toString(CryptoJS.enc.Utf8);
+
+            if(req.body.password == password){
                 res.status(200).json({success:true,message:"Your are logged in successfully!"})
             }
             else{
