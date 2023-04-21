@@ -36,7 +36,9 @@ const login = () => {
 
         let res = await fetch('http://localhost:3000/api/login', options)
         let response_json = await res.json();
+        // console.log(response_json);
         if (response_json.success) {
+            localStorage.setItem("token",response_json.token)
             toast(response_json.message, {
                 position: "top-right",
                 autoClose: 5000,
