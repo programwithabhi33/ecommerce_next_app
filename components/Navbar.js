@@ -34,11 +34,11 @@ const Navbar = ({logout, user,cart, addToCart, removeFromCart, subTotal, clearCa
           </nav>
           <div className="flex items-center my-2">
             {!user.value && <button className="bg-pink-700 mx-2 px-2 py-1 rounded-md text-white"><Link href={"/login"}>Login</Link></button>}
-            {dropdown && <div onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} className="absolute top-12 right-12 bg-pink-700 rounded-md px-4 py-2 text-white">
+            {dropdown && <div onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} className="absolute top-12 right-12 bg-white shadow-lg border border-pink-300 rounded-md px-4 py-2 text-pink-700 font-bold">
               <ul>
-                <Link href={"/account"}><li className='py-1'>My Account</li></Link>
-                <Link href={"/checkout"}><li className='py-1'>Checkout</li></Link>
-                <li className='py-1 cursor-pointer' onClick={logout}><a>Logout</a></li>
+                <Link href={"/account"}><li className='py-1 hover:shadow-md rounded-lg px-2'>My Account</li></Link>
+                <Link href={"/checkout"}><li className='py-1 hover:shadow-md rounded-lg px-2'>Checkout</li></Link>
+                <li className=' hover:shadow-md first-line:py-1 cursor-pointer rounded-lg px-2' onClick={()=>{setDropdown(false);logout()}}><a>Logout</a></li>
               </ul>
             </div>}
             {user.value && <Link onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2' /></Link>}

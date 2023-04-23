@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 
-const login = () => {
 
+const login = () => {
+    
     const router = useRouter();
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+    useEffect(() => {
+        if(localStorage.getItem("token")){
+            router.push("/")
+        }
+    }, [])
 
     // handle change function applied on the input and getting corresponding values and set the state variables 
     const handleChange = (e) => {
@@ -38,7 +45,7 @@ const login = () => {
         let response_json = await res.json();
         // console.log(response_json);
         if (response_json.success) {
-            localStorage.setItem("token",response_json.token)
+            localStorage.setItem("token", response_json.token)
             toast(response_json.message, {
                 position: "top-right",
                 autoClose: 5000,

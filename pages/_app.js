@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import '../styles/globals.css'
 import {useRouter} from 'next/router'
+import LoadingBar from 'react-top-loading-bar'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
 
@@ -11,10 +12,17 @@ function MyApp({ Component, pageProps }) {
   const [subTotal, setsubTotal] = useState(0)
   const [abhi, setAbhi] = useState(0)
   const [user, setUser] = useState({value:null})
+  const [progress, setProgress] = useState(0)
 
   // getting the token from the localStorage and setting the state of user if the token in successfully get from the localStorage or token is presetn in the localStorage
 
   useEffect(() => {
+    router.events.on('routeChangeComplete', ()=>{
+      setProgress(100)
+    })
+    router.events.on('routeChangeStart', ()=>{
+      setProgress(40)
+    })
     try{
       if(localStorage.getItem("cart")){
         setCart(JSON.parse(localStorage.getItem("cart")));
@@ -83,9 +91,17 @@ function MyApp({ Component, pageProps }) {
   const logout = ()=>{
     setUser({value:null})
     localStorage.removeItem("token")
+    router.push("/");
   }
   
   return <>
+   <LoadingBar
+        color='#f11946'
+        progress={progress}
+        waitingTime={400}
+        shadow={true}
+        onLoaderFinished={() => setProgress(0)}
+    />
   {/* When you passing key prop to component that means the component only render if the key is defined or something like that i'm not sure about that  */}
   <Navbar logout={logout} user={user} key={user} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   <Component  cart={cart} buyNow={buyNow} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />

@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import { useRouter } from 'next/router';
 
 export const signup = () => {
+
+    const router = useRouter();
 
     const [name, setName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+
+    useEffect(() => {
+        if(localStorage.getItem("token")){
+            router.push("/")
+        }
+    }, [])
 
     // handle change function applied on the input and getting corresponding values and set the state variables 
     const handleChange = (e) => {
