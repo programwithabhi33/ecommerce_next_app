@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import '../styles/globals.css'
+import {useRouter} from 'next/router'
 
 function MyApp({ Component, pageProps }) {
 
+  const router = useRouter();
   const [cart, setCart] = useState({})
   const [subTotal, setsubTotal] = useState(0)
   const [abhi, setAbhi] = useState(0)
+  const [user, setUser] = useState({value:null})
+
+  // getting the token from the localStorage and setting the state of user if the token in successfully get from the localStorage or token is presetn in the localStorage
 
   useEffect(() => {
     try{
@@ -23,8 +28,11 @@ function MyApp({ Component, pageProps }) {
       console.error(error)
       localStorage.clear();
     }
-   
-  }, [])
+    let token = localStorage.getItem("token")
+    if(token){
+      setUser({value:token})
+    }
+  }, [router.query])
   
 
  let addToCart = (itemCode,itemName,qty,price,size,color)=>{
@@ -72,10 +80,14 @@ function MyApp({ Component, pageProps }) {
     saveCart(newCart);
     setCart(newCart)
   }
+  const logout = ()=>{
+    setUser({value:null})
+    localStorage.removeItem("token")
+  }
   
   return <>
   {/* When you passing key prop to component that means the component only render if the key is defined or something like that i'm not sure about that  */}
-  <Navbar key={abhi} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+  <Navbar logout={logout} user={user} key={user} cart={cart}  addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
   <Component  cart={cart} buyNow={buyNow} addToCart={addToCart} saveCart={saveCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
   <Footer/>
   </>

@@ -51,7 +51,7 @@ const login = () => {
             });
             setTimeout(() => {
                 router.push("/");
-            }, 3000);
+            }, 2000);
         }
         else {
             toast.error(response_json.message, {

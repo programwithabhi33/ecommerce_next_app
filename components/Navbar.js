@@ -3,7 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { AiFillCloseCircle, AiOutlineShoppingCart, AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
-const Navbar = ({ cart, addToCart, removeFromCart, subTotal, clearCart }) => {
+import { useState } from 'react';
+const Navbar = ({logout, user,cart, addToCart, removeFromCart, subTotal, clearCart }) => {
 
   const ref = useRef('')
   const handleClick = () => {
@@ -16,22 +17,33 @@ const Navbar = ({ cart, addToCart, removeFromCart, subTotal, clearCart }) => {
       ref.current.classList.add("translate-x-full")
     }
   }
+  const [dropdown, setDropdown] = useState(false)
   return (
     <>
       <nav className='bg-slate-100 shadow-lg sticky top-0 z-30'>
         <div className="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
           <a className="flex title-font font-medium items-center text-gray-900 mb-2 md:mb-0">
-              <Image src="/myLogo2.png" alt="Picture of the author" width={50} height={50} />
-              <span className="ml-3 text-xl">Programwithabhi</span>
+            <Image src="/myLogo2.png" alt="Picture of the author" width={50} height={50} />
+            <span className="ml-3 text-xl">Programwithabhi</span>
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link legacyBehavior href={"/"}><a className="mr-5 hover:text-pink-900 cursor-pointer">About Me</a></Link>
             <Link legacyBehavior href={"/"}><a className="mr-5 hover:text-pink-900 cursor-pointer">Contact Me</a></Link>
             {/* <Link legacyBehavior  href={"/sample"}><a className="mr-5 hover:text-pink-900 cursor-pointer">My Projects</a></Link> */}
             <Link legacyBehavior href={"/products"}><a className="mr-5 hover:text-pink-900 cursor-pointer">Products</a></Link>
-            <Link href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2' /></Link>
-            <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick} />
           </nav>
+          <div className="flex items-center my-2">
+            {!user.value && <button className="bg-pink-700 mx-2 px-2 py-1 rounded-md text-white"><Link href={"/login"}>Login</Link></button>}
+            {dropdown && <div onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} className="absolute top-12 right-12 bg-pink-700 rounded-md px-4 py-2 text-white">
+              <ul>
+                <Link href={"/account"}><li className='py-1'>My Account</li></Link>
+                <Link href={"/checkout"}><li className='py-1'>Checkout</li></Link>
+                <li className='py-1 cursor-pointer' onClick={logout}><a>Logout</a></li>
+              </ul>
+            </div>}
+            {user.value && <Link onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2' /></Link>}
+            <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick} />
+          </div>
         </div>
         <div ref={ref} className={`sideCart absolute h-[100vh] top-0 right-0 bg-pink-300 px-11 py-4 transition-all translate translate-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
           <AiFillCloseCircle onClick={handleClick} className='cursor-pointer text-xl absolute right-1 top-1' />
