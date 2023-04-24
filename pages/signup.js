@@ -8,9 +8,9 @@ export const signup = () => {
 
     const router = useRouter();
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export const signup = () => {
             body: JSON.stringify(formData),
         };
 
-        let res = await fetch('http://localhost:3000/api/signup', options)
+        let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, options)
         let response_json = await res.json();
         document.getElementById("sign_form").reset();
         document.getElementById("sign_up").setAttribute("disabled", false)

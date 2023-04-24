@@ -27,7 +27,7 @@ const product = ({buyNow,addToCart,mainProduct,colorSizeArray}) => {
   const refreshVariant = (newSize,newColor)=>{
     // console.log(newColor,newSize)
     // console.log(colorSizeArray)
-    const url = `http://localhost:3000/product/${colorSizeArray[newColor][newSize]['slug']}`;
+    const url = `${process.env.NEXT_PUBLIC_HOST}product/${colorSizeArray[newColor][newSize]['slug']}`;
     window.location = url;
   }
 

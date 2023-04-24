@@ -9,8 +9,8 @@ const login = () => {
     
     const router = useRouter();
 
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
         if(localStorage.getItem("token")){
@@ -41,7 +41,7 @@ const login = () => {
             body: JSON.stringify(formData),
         };
 
-        let res = await fetch('http://localhost:3000/api/login', options)
+        let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/login`, options)
         let response_json = await res.json();
         // console.log(response_json);
         if (response_json.success) {
