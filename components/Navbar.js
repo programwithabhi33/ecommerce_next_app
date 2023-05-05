@@ -55,7 +55,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, subTotal, clear
           </ol>
           <div className="my-2">
             {Object.keys(cart).length > 0 && <button onClick={clearCart} className="btn bg-pink-500 px-2 py-2 rounded-md m-2">Clear Cart</button>}
-            <button className='bg-pink-500 px-2 rounded-md my-2 py-2'>Subtotal: {subTotal}</button>
+            <button className='px-2 rounded-md my-2 py-2'>Subtotal: ₹{subTotal}</button>
           </div>
 
           {Object.keys(cart).length > 0 && <Link href={"/Checkout"} className="bg-pink-600 flex items-center rounded-md cursor-pointer px-1 justify-center">
