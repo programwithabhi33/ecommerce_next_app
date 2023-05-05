@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image';
 import Link from 'next/link'
-import { AiFillCloseCircle, AiOutlineShoppingCart, AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import { AiFillCloseCircle, AiOutlineShoppingCart, AiFillPlusCircle, AiFillMinusCircle, AiOutlineShopping } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
 import { useState } from 'react';
-const Navbar = ({logout, user,cart, addToCart, removeFromCart, subTotal, clearCart }) => {
+const Navbar = ({ logout, user, cart, addToCart, removeFromCart, subTotal, clearCart }) => {
 
   const ref = useRef('')
   const handleClick = () => {
@@ -34,14 +34,14 @@ const Navbar = ({logout, user,cart, addToCart, removeFromCart, subTotal, clearCa
           </nav>
           <div className="flex items-center my-2">
             {!user.value && <button className="bg-pink-700 mx-2 px-2 py-1 rounded-md text-white"><Link href={"/login"}>Login</Link></button>}
-            {dropdown && <div onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} className="absolute top-12 right-12 bg-white shadow-lg border border-pink-300 rounded-md px-4 py-2 text-pink-700 font-bold">
+            {dropdown && <div onMouseLeave={() => { setDropdown(false) }} onMouseOver={() => { setDropdown(true) }} className="absolute top-12 right-12 bg-white shadow-lg border border-pink-300 rounded-md px-4 py-2 text-pink-700 font-bold">
               <ul>
                 <Link href={"/account"}><li className='py-1 hover:shadow-md rounded-lg px-2'>My Account</li></Link>
                 <Link href={"/checkout"}><li className='py-1 hover:shadow-md rounded-lg px-2'>Checkout</li></Link>
-                <li className=' hover:shadow-md first-line:py-1 cursor-pointer rounded-lg px-2' onClick={()=>{setDropdown(false);logout()}}><a>Logout</a></li>
+                <li className=' hover:shadow-md first-line:py-1 cursor-pointer rounded-lg px-2' onClick={() => { setDropdown(false); logout() }}><a>Logout</a></li>
               </ul>
             </div>}
-            {user.value && <Link onMouseLeave={()=>{setDropdown(false)}} onMouseOver={()=>{setDropdown(true)}} href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2' /></Link>}
+            {user.value && <Link onMouseLeave={() => { setDropdown(false) }} onMouseOver={() => { setDropdown(true) }} href={'/login'}><MdAccountCircle className='cursor-pointer font-semibold text-2xl mr-2' /></Link>}
             <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick} />
           </div>
         </div>
@@ -52,9 +52,16 @@ const Navbar = ({logout, user,cart, addToCart, removeFromCart, subTotal, clearCa
             {Object.keys(cart).map((item) => {
               return <li key={item}><AiFillMinusCircle onClick={() => { removeFromCart(item, cart[item].qty) }} className='m2-0 cursor-pointer inline' /> {cart[item].itemName + ` (${cart[item].color})/${cart[item].size}`} {cart[item].qty}<AiFillPlusCircle onClick={() => { addToCart(cart[item].itemCode, cart[item], 2, cart[item].price, cart[item].size) }} className='m-2 cursor-pointer inline' /></li>
             })}
-            {Object.keys(cart).length > 0 && <button onClick={clearCart} className="btn bg-pink-400 px-2 rounded m-2">Clear Cart</button>}
           </ol>
-          <span>Subtotal: {subTotal}</span>
+          <div className="my-2">
+            {Object.keys(cart).length > 0 && <button onClick={clearCart} className="btn bg-pink-500 px-2 py-2 rounded-md m-2">Clear Cart</button>}
+            <button className='bg-pink-500 px-2 rounded-md my-2 py-2'>Subtotal: {subTotal}</button>
+          </div>
+
+          {Object.keys(cart).length > 0 && <Link href={"/Checkout"} className="bg-pink-600 flex items-center rounded-md cursor-pointer px-1 justify-center">
+            <AiOutlineShopping/>
+            <button className='px-2 rounded-md my-2'>Checkout</button>
+          </Link>}
         </div>
       </nav>
       <div className="text-center py-4 lg:px-4 cursor-pointer">
