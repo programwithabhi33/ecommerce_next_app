@@ -1,7 +1,31 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { AiOutlineShopping } from 'react-icons/ai';
 
 const Checkout = ({ cart, subTotal, clearCart }) => {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [address, setAddress] = useState("")
+    const [phone, setPhone] = useState("")
+    const [pincode, setPincode] = useState("")
+
+    function handleChange(e){
+        console.log(e.target.name)
+        if(e.target.name == "name"){
+            setName(e.target.value)
+        }
+        else if(e.target.name == "email"){
+            setEmail(e.target.value)
+        }
+        else if(e.target.name == "address"){
+            setAddress(e.target.value)
+        }
+        else if(e.target.name == "phone"){
+            setPhone(e.target.value)
+        }
+        else if(e.target.name == "pincode"){
+            setPincode(e.target.value)
+        }
+    }
     return (
         <>
             <section className="text-gray-600 body-font">
@@ -15,27 +39,27 @@ const Checkout = ({ cart, subTotal, clearCart }) => {
                     <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end mb-4">
                         <div className="relative flex-grow w-full">
                             <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">Full Name</label>
-                            <input type="text" id="full-name" name="full-name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input value={name} onChange={handleChange} type="text" id="name" name="name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                         <div className="relative flex-grow w-full">
                             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-                            <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input value={email} onChange={handleChange} type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                     </div>
                     <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end mb-4">
                         <div className="relative flex-grow w-full">
                             <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">Address</label>
-                            <textarea type="text" id="full-name" name="full-name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <textarea type="text" id="address" name="address" value={address} onChange={handleChange} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                     </div>
                     <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end mb-4">
                         <div className="relative flex-grow w-full">
                             <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">Phone</label>
-                            <input type="text" id="full-name" name="full-name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input type="text" id="phone" name="phone" value={phone} onChange={handleChange} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                         <div className="relative flex-grow w-full">
                             <label htmlFor="email" className="leading-7 text-sm text-gray-600">City</label>
-                            <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input type="text" id="city" name="city" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                     </div>
                     <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end mb-4">
@@ -45,7 +69,7 @@ const Checkout = ({ cart, subTotal, clearCart }) => {
                         </div>
                         <div className="relative flex-grow w-full">
                             <label htmlFor="email" className="leading-7 text-sm text-gray-600">PinCode</label>
-                            <input type="email" id="email" name="email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input type="text" id="pincode" name="pincode" value={pincode} onChange={handleChange} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                     </div>
 
