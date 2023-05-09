@@ -11,5 +11,4 @@ const ProductsSchema = new Schema({
   color: { type: String, required:true},
   image: { type: String, required:true},
 });
-mongoose.models = {};
-export default mongoose.model("Product",ProductsSchema)
+export default mongoose.models.Product || mongoose.model("Product",ProductsSchema);

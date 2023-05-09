@@ -12,8 +12,7 @@ const UsersSchema = new Schema({
 // adding below because when you run this schema first time the model create on the other hand the another time when you call it or runs it give you error because with the name the model is already there in the database so that reason we gave the mongoose.model = empty object 
 
 
-mongoose.models = {};
-export default mongoose.model("User",UsersSchema)
+// mongoose.models = {};
 
 
-// export default mongoose.model.User || mongoose.model("User",UsersSchema)
+export default mongoose.models.User || mongoose.model("User",UsersSchema)

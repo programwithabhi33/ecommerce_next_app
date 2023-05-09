@@ -45,7 +45,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, subTotal, clear
             <AiOutlineShoppingCart className='cursor-pointer font-semibold text-2xl mr-2' onClick={handleClick} />
           </div>
         </div>
-        <div ref={ref} className={`sideCart absolute h-[100vh] top-0 right-0 bg-pink-300 px-11 py-4 transition-all translate translate-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div ref={ref} className={`sideCart absolute h-screen top-0 right-0 bg-pink-300 px-11 py-4 transition-all translate translate-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
           <AiFillCloseCircle onClick={handleClick} className='cursor-pointer text-xl absolute right-1 top-1' />
           <ol>
             {Object.keys(cart).length == 0 && <div>Your cart is Empty!</div>}

@@ -7,5 +7,4 @@ const OrdersSchema = new Schema({
   amount:   {type:Number},
   address: {type:String},
 });
-mongoose.models = {};
-export default mongoose.model("Order",OrdersSchema)
+export default mongoose.models.Order || mongoose.model("Order",OrdersSchema);
